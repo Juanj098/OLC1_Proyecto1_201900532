@@ -6,9 +6,7 @@
             <file>file:/C:/Users/juanj/OneDrive/Escritorio/Compiladores%201/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/Analizador/Lexer.jflex</file>
             <file>file:/C:/Users/juanj/OneDrive/Escritorio/Compiladores%201/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/Analizador/Generador.java</file>
             <file>file:/C:/Users/juanj/OneDrive/Escritorio/Compiladores%201/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/Analizador/test.java</file>
-            <file>file:/C:/Users/juanj/OneDrive/Escritorio/Compiladores%201/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/Analizador/lexer.java</file>
-            <file>file:/C:/Users/juanj/OneDrive/Escritorio/Compiladores%201/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/olc1_proyecto1_201900532/OLC1_proyecto1_201900532.java</file>
-            <file>file:/C:/Users/juanj/OneDrive/Escritorio/Compiladores%201/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/Analizador/Token.java</file>
+            <file>file:/C:/Users/juanj/OneDrive/Escritorio/Compiladores%201/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/Analizador/TokenCons.java</file>
         </group>
     </open-files>
 </project-private>

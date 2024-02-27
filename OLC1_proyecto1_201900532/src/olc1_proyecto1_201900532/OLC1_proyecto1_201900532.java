@@ -15,7 +15,6 @@ public class OLC1_proyecto1_201900532 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
     }
-    
+
 }

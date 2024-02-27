@@ -16,12 +16,8 @@ public class Generador {
             String[] opJFlex = {path + "Lexer.jflex","-d",path};
             jflex.Main.generate(opJFlex);
         } catch (Exception e) {
-//            Logger.getLogger(Generador.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("No se ha podido generar los analizadores");
+            System.out.println(e);
         }
     }
-    
-//    public static genLexer(String ruta){
-//        File arch = new File(ruta);
-//        jflex.Main.generate(arch);
-//    }
 }
