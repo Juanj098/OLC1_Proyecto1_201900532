@@ -17,9 +17,10 @@ import java_cup.runtime.Symbol;
 %}
 VARI = [string|Double]
 Int = [0-9]+
+comi = [\"]
 Dec = [0-9]+\.[0-9]+
-VARID = [a-zA-Z]+[0-9]*
-PALS = \"[a-zA-Z .]+\"
+VARID = [A-Za-z]+[0-9]*
+PALS = [a-zA-Z .]+
 varArr = @[a-zA-Z]+[0-9]*
 whitespace = [ |\t|\r|\n]*
 
@@ -49,11 +50,11 @@ whitespace = [ |\t|\r|\n]*
 "<-" {return new Symbol(sym.FLIZQ, yyline, yycolumn, yytext());}
 "::" {return new Symbol(sym.DPD, yyline, yycolumn, yytext());}
 ";"  {return new Symbol(sym.PYC, yyline, yycolumn, yytext());}
-"\"" {return new Symbol(sym.COMI, yyline, yycolumn, yytext());}
-
+{comi} {return new Symbol(sym.COMI, yyline, yycolumn, yytext());}
+{Dec} {return new Symbol(sym.NUM, yyline, yycolumn, yytext());}
 //variables
 {VARID} {return new Symbol(sym.ID, yyline, yycolumn, yytext());}
-{PALS} {return new Symbol(sym.CONT, yyline, yycolumn, yytext());}
+{PALS} {return new Symbol(sym.CADENA, yyline, yycolumn, yytext());}
 
 //errores
 

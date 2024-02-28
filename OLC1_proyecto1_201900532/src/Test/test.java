@@ -18,10 +18,11 @@ public class test {
     public static void main(String[] args) throws IOException{
         System.out.println("--------------------------");
         String prueba =  "PROGRAM\n" +
-                         "var:char[]:: example <- \"hola\" end; \n" +
+                         "var : char[];\n"+
+                         "var : double;\n"+
                          "END PROGRAM";
-        Generar();
-//        Analizar(prueba);
+//        Generar();
+        Analizar(prueba);
 
         for (int i = 0; i< Function.list.size();i++){
             System.out.println(Function.list.get(i));
@@ -39,6 +40,8 @@ public class test {
             System.out.println(e);
         }
     }
+
+
     public static void Generar(){
         try {
             String path = "C:/Users/juanj/OneDrive/Escritorio/Compiladores 1/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/Analizador/";

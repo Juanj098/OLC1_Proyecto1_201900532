@@ -37,44 +37,47 @@ terminal String DOUBLE;
 terminal String FLIZQ;
 terminal String DP;
 terminal String DPD;
-terminal String CONT;
 terminal String ID;
 terminal String PYC;
 terminal String ENDP;
 terminal String VAR;
 terminal String COMI;
-terminal String NUM;
 terminal string PROGRAM;
+terminal String NUM;
+terminal String CADENA;
+
 
 //------> Declaración de no terminales
-non terminal String star;
-non terminal String d;
-non terminal String m;
-non terminal String dprima;
-non terminal String ins;
-non terminal String program;
+non terminal star;
+non terminal program;
+non terminal lins;
+non terminal ins;
+non terminal d;
+non terminal type_d;
+non terminal m;
+
+precedence left VAR;
 
 //------> Definir Simbolo Inicial
 
 start with star;
 
 // ------------>  Producciones  <------------
-star ::= program
+star ::= PROGRAM program ENDP
+;
+program ::= program lins
+        |lins
+;
+lins ::= lins d
+          | d
+;
+d ::= VAR DP type_d PYC
+;
+type_d ::= CHAR
+           | DOUBLE
 ;
 
-program ::= PROGRAM ins ENDP
-           | PROGRAM ENDP
-;
 
-ins ::= ins d
-       | ins m
-       | d
-       | m
-;
 
-d ::=  VAR DP dprima
-;
 
-dprima ::= CHAR  DPD ID FLIZQ COMI CONT:c COMI END PYC {:System.out.println(c);:}
-         | DOUBLE DPD ID NUM:n END PYC {:System.out.println(n);:}
- ;
+
