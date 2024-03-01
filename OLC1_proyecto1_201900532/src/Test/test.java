@@ -18,8 +18,11 @@ public class test {
     public static void main(String[] args) throws IOException{
         System.out.println("--------------------------");
         String prueba =  "PROGRAM\n" +
-                         "var : char[];\n"+
-                         "var : double;\n"+
+                         "var:char[]::exampleCHAR<-\"es un ejemplo\"end;\n"+
+                         "var:double::example123<-1.5end;\n"+
+                         "var:char[]::hola<-\"juan jose\"end;\n"+
+//                         "arr:Char[]::@YChar<-[\" hola \" , \"juancho\"]end;\n"+
+                         "arr:double::@D123<-[]end;\n"+
                          "END PROGRAM";
 //        Generar();
         Analizar(prueba);

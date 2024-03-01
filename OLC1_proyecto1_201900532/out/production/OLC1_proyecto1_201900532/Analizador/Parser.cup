@@ -36,6 +36,7 @@ terminal String CHAR;
 terminal String DOUBLE;
 terminal String FLIZQ;
 terminal String DP;
+terminal String COMA;
 terminal String DPD;
 terminal String ID;
 terminal String PYC;
@@ -45,7 +46,10 @@ terminal String COMI;
 terminal string PROGRAM;
 terminal String NUM;
 terminal String CADENA;
-
+terminal String ARRAY;
+terminal String IDARR;
+terminal String CORIZQ;
+terminal String CORDER;
 
 //------> Declaración de no terminales
 non terminal star;
@@ -54,9 +58,16 @@ non terminal lins;
 non terminal ins;
 non terminal d;
 non terminal type_d;
+non terminal type_arr;
 non terminal m;
+non terminal pals;
+non terminal c;
+non terminal ca;
+non terminal valorChar;
+non  terminal r;
 
-precedence left VAR;
+precedence left VAR,ARRAY;
+precedence left COMI, CADENA;
 
 //------> Definir Simbolo Inicial
 
@@ -65,21 +76,40 @@ start with star;
 // ------------>  Producciones  <------------
 star ::= PROGRAM program ENDP
 ;
-
 program ::= program lins
-        |lins
+            |lins
 ;
 
-lins ::= lins d
-          | d
+lins::= lins d
+        |lins m
+        |d
+        |m
 ;
 
-d ::= VAR DP type_d PYC
+d ::= VAR DP type_d
+      |ARRAY DP type_arr
 ;
 
-type_d ::= CHAR
-           | DOUBLE
+type_d ::= CHAR DPD ID:id FLIZQ COMI CADENA:cade COMI END PYC {:System.out.println(id.toString()+"::"+cade.toString());:}
+         |DOUBLE DPD ID:id FLIZQ NUM:number END PYC {:System.out.println(id.toString()+"::"+number.toString());:}
 ;
+
+type_arr ::= CHAR DPD IDARR:idarr FLIZQ CORIZQ pals CORDER END PYC{:System.out.println(idarr.toString()+" -- ");:}
+            |DOUBLE DPD IDARR:id FLIZQ CORIZQ CORDER END PYC {:System.out.println(id.toString());:}
+;
+
+pals::= COMI valorChar COMI;
+
+valorChar ::= valorChar ca
+    | ca
+;
+ca::= CADENA:cad {:System.out.println(cad);:}
+    |r
+;
+r::= COMA CADENA;
+
+
+
 
 
 
