@@ -11,8 +11,11 @@ public class sym {
   public static final int PYC = 10;
   public static final int CADENA = 16;
   public static final int CHAR = 3;
+  public static final int SUM = 21;
+  public static final int PARIZQ = 23;
   public static final int END = 2;
   public static final int IDARR = 18;
+  public static final int PARDER = 24;
   public static final int COMI = 13;
   public static final int DPD = 8;
   public static final int ID = 9;
@@ -21,6 +24,8 @@ public class sym {
   public static final int NUM = 15;
   public static final int COMA = 7;
   public static final int EOF = 0;
+  public static final int ADD = 25;
+  public static final int MINUS = 26;
   public static final int error = 1;
   public static final int CORIZQ = 19;
   public static final int FLIZQ = 5;
@@ -28,6 +33,7 @@ public class sym {
   public static final int ENDP = 11;
   public static final int ARRAY = 17;
   public static final int VAR = 12;
+  public static final int RESTA = 22;
   public static final int DOUBLE = 4;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -50,7 +56,13 @@ public class sym {
   "ARRAY",
   "IDARR",
   "CORIZQ",
-  "CORDER"
+  "CORDER",
+  "SUM",
+  "RESTA",
+  "PARIZQ",
+  "PARDER",
+  "ADD",
+  "MINUS"
   };
 }
 

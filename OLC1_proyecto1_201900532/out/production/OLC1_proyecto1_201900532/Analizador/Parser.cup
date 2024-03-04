@@ -1,7 +1,7 @@
 // ------------  Paquete e importaciones ------------
 package Analizador;
 
-import java_cup.runtime.Symbol;
+import java_cup.runtime.*;
 
 
 //------> Codigo para el parser
@@ -50,24 +50,34 @@ terminal String ARRAY;
 terminal String IDARR;
 terminal String CORIZQ;
 terminal String CORDER;
+terminal String SUM;
+terminal String RESTA;
+terminal String PARIZQ;
+terminal String PARDER;
+terminal String ADD;
+terminal String MINUS;
 
 //------> Declaración de no terminales
 non terminal star;
 non terminal program;
 non terminal lins;
-non terminal ins;
 non terminal d;
 non terminal type_d;
 non terminal type_arr;
 non terminal m;
 non terminal pals;
-non terminal c;
-non terminal ca;
 non terminal valorChar;
-non  terminal r;
+non terminal valorNum;
+non terminal nums;
+non terminal Double o;
+non terminal g;
+
 
 precedence left VAR,ARRAY;
 precedence left COMI, CADENA;
+precedence left SUM, NUM;
+precedence left RESTA;
+
 
 //------> Definir Simbolo Inicial
 
@@ -81,37 +91,40 @@ program ::= program lins
 ;
 
 lins::= lins d
-        |lins m
+        |lins o:n1 PYC {:System.out.println(n1);:}
+        |lins g
         |d
-        |m
+        |o
+        |g
 ;
 
 d ::= VAR DP type_d
       |ARRAY DP type_arr
 ;
 
+o ::= SUM PARIZQ o:v1 ADD o:v2  PARDER  {:RESULT = v1 + v2;:}
+    |RESTA PARIZQ o:v1  MINUS o:v2 PARDER  {:RESULT = v1 - v2;:}
+    | NUM:n {:RESULT = Double.valueOf(n);:}
+;
+
 type_d ::= CHAR DPD ID:id FLIZQ COMI CADENA:cade COMI END PYC {:System.out.println(id.toString()+"::"+cade.toString());:}
-         |DOUBLE DPD ID:id FLIZQ NUM:number END PYC {:System.out.println(id.toString()+"::"+number.toString());:}
+         |DOUBLE DPD ID:id FLIZQ {:System.out.println(id);:} NUM:number END PYC {:System.out.println(number);:}
 ;
 
-type_arr ::= CHAR DPD IDARR:idarr FLIZQ CORIZQ pals CORDER END PYC{:System.out.println(idarr.toString()+" -- ");:}
-            |DOUBLE DPD IDARR:id FLIZQ CORIZQ CORDER END PYC {:System.out.println(id.toString());:}
+
+type_arr ::= CHAR DPD IDARR:idarr {:System.out.println(idarr.toString()+" -- ");:} FLIZQ CORIZQ pals CORDER END PYC
+            |DOUBLE DPD IDARR:id {:System.out.println(id.toString());:} FLIZQ CORIZQ nums CORDER END PYC
 ;
 
-pals::= COMI valorChar COMI;
-
-valorChar ::= valorChar ca
-    | ca
+pals::= pals COMA valorChar
+        | valorChar
 ;
-ca::= CADENA:cad {:System.out.println(cad);:}
-    |r
+valorChar ::= COMI CADENA:ca COMI {:System.out.println(ca.toString());:}
 ;
-r::= COMA CADENA;
 
-
-
-
-
-
-
+nums ::= nums COMA valorNum
+        | valorNum
+;
+valorNum ::= NUM:nu {:System.out.println(nu.toString());:}
+;
 

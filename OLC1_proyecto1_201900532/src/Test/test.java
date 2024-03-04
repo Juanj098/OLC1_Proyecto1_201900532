@@ -3,32 +3,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Test;
-
 import Func.Function;
-
+import Errores.Errores;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.List;
+
+import Func.Function;
+
+import static Func.Function.list;
 
 /**
  *
  * @author juanj
  */
 public class test {
+
     public static void main(String[] args) throws IOException{
         System.out.println("--------------------------");
         String prueba =  "PROGRAM\n" +
                          "var:char[]::exampleCHAR<-\"es un ejemplo\"end;\n"+
                          "var:double::example123<-1.5end;\n"+
                          "var:char[]::hola<-\"juan jose\"end;\n"+
-//                         "arr:Char[]::@YChar<-[\" hola \" , \"juancho\"]end;\n"+
-                         "arr:double::@D123<-[]end;\n"+
+                         "arr:char[]::@labels<-[\" label aprobar \" , \" P1 \" , \" P2 \"]end;\n"+
+                         "arr:double::@D123<-[1.0,2.0,33.0]end;\n"+
+//                         "var:double::suma<-sum(1.0,5.12)end;\n"+
+                         "SUM(SUM(7.0+4.0)+REST(5.0-1.0));\n"+
                          "END PROGRAM";
 //        Generar();
         Analizar(prueba);
 
-        for (int i = 0; i< Function.list.size();i++){
-            System.out.println(Function.list.get(i));
+        for (int i = 0; i< list.size();i++){
+            System.out.println(list.get(i));
         }
 
 
