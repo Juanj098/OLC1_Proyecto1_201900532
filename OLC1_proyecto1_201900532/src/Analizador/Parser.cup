@@ -2,6 +2,8 @@
 package Analizador;
 
 import java_cup.runtime.*;
+import java.util.ArrayList;
+import Func.Function;
 
 
 //------> Codigo para el parser
@@ -20,6 +22,11 @@ parser code
     {
             System.err.println("Error Sintactico: "+ s.value + " - Fila: " + s.right + " - Columna: " + s.left + ". Sin recuperacion." );
     }
+
+    public static ArrayList<Double> listE = new ArrayList<>();
+    public static ArrayList<NodoSym> TS = new ArrayList<>();
+    public static ArrayList<Double> listD = new ArrayList<>();
+    public static ArrayList<String> listS = new ArrayList<>();
 
 :};
 
@@ -54,8 +61,11 @@ terminal String SUM;
 terminal String RESTA;
 terminal String PARIZQ;
 terminal String PARDER;
-terminal String ADD;
-terminal String MINUS;
+terminal String MULTI;
+terminal String DIV;
+terminal String MOD;
+terminal String MEDIA;
+terminal String MODA;
 
 //------> Declaración de no terminales
 non terminal star;
@@ -64,19 +74,23 @@ non terminal lins;
 non terminal d;
 non terminal type_d;
 non terminal type_arr;
-non terminal m;
 non terminal pals;
 non terminal valorChar;
 non terminal valorNum;
+non terminal valorn;
 non terminal nums;
 non terminal Double o;
 non terminal g;
+non terminal n;
+non terminal e;
+non terminal nm;
 
 
 precedence left VAR,ARRAY;
 precedence left COMI, CADENA;
-precedence left SUM, NUM;
-precedence left RESTA;
+precedence left SUM, RESTA;
+precedence left MULTI,DIV,MOD;
+precedence left NUM;
 
 
 //------> Definir Simbolo Inicial
@@ -91,10 +105,8 @@ program ::= program lins
 ;
 
 lins::= lins d
-        |lins o:n1 PYC {:System.out.println(n1);:}
         |lins g
         |d
-        |o
         |g
 ;
 
@@ -102,29 +114,76 @@ d ::= VAR DP type_d
       |ARRAY DP type_arr
 ;
 
-o ::= SUM PARIZQ o:v1 ADD o:v2  PARDER  {:RESULT = v1 + v2;:}
-    |RESTA PARIZQ o:v1  MINUS o:v2 PARDER  {:RESULT = v1 - v2;:}
-    | NUM:n {:RESULT = Double.valueOf(n);:}
+type_d ::= CHAR DPD ID:id FLIZQ COMI CADENA:cade COMI END PYC
+{:
+    System.out.println(id.toString()+"::"+cade.toString());
+    NodoSym Varchar = new NodoSym(id,cade,"char");
+    TS.add(Varchar);
+:}
+         |DOUBLE DPD ID:id FLIZQ
+{:
+    System.out.println(id); listE.clear();
+ :} n:v
+ {:
+    NodoSym Vardouble = new NodoSym(id,String.valueOf(v),"double");
+    TS.add(Vardouble);
+      System.out.println(v);
+ :}
 ;
 
-type_d ::= CHAR DPD ID:id FLIZQ COMI CADENA:cade COMI END PYC {:System.out.println(id.toString()+"::"+cade.toString());:}
-         |DOUBLE DPD ID:id FLIZQ {:System.out.println(id);:} NUM:number END PYC {:System.out.println(number);:}
+n ::= NUM:number END PYC {:RESULT = number;:}
+      |o:n1 END PYC {:RESULT = n1;:}
+      |e:n2 END PYC {:RESULT = n2;:}
 ;
 
+e::=  MEDIA PARIZQ CORIZQ nm CORDER PARDER
+         {:
+         if (listE.size()>0){
+            double prom;
+            prom = Function.Media(listE);
+            RESULT = prom;
+         }
+         :}
+     |MODA PARIZQ CORIZQ nm CORDER PARDER
+        {:
+        if (listE.size()>0){
+            double mod;
+            mod = Function.Moda(listE);
+            RESULT = mod;
+        }
+        :}
+;
 
-type_arr ::= CHAR DPD IDARR:idarr {:System.out.println(idarr.toString()+" -- ");:} FLIZQ CORIZQ pals CORDER END PYC
-            |DOUBLE DPD IDARR:id {:System.out.println(id.toString());:} FLIZQ CORIZQ nums CORDER END PYC
+nm ::=  nm COMA valorn
+    |valorn
+;
+
+valorn ::=o:n {:RESULT = listE.add(n);:}
+;
+
+o ::= SUM PARIZQ o:v1 COMA o:v2  PARDER  {:RESULT = v1 + v2;:}
+    |RESTA PARIZQ o:v1  COMA o:v2 PARDER  {:RESULT = v1 - v2;:}
+    |MULTI PARIZQ o:v1 COMA o:v2 PARDER {:RESULT = v1 * v2;:}
+    |DIV PARIZQ o:v1 COMA o:v2 PARDER {:RESULT = v1 / v2;:}
+    |MOD PARIZQ o:v1 COMA o:v2 PARDER {:RESULT = v1 % v2;:}
+    |NUM:n {:RESULT = Double.valueOf(n);:}
+;
+
+type_arr ::= CHAR DPD IDARR:idarr {:System.out.println(idarr.toString());:} FLIZQ CORIZQ pals CORDER END PYC
+            |DOUBLE DPD IDARR:id {:System.out.println(id.toString()); listD.clear();:} FLIZQ CORIZQ nums CORDER END PYC {:System.out.println(listD);:}
 ;
 
 pals::= pals COMA valorChar
         | valorChar
 ;
+
 valorChar ::= COMI CADENA:ca COMI {:System.out.println(ca.toString());:}
 ;
 
 nums ::= nums COMA valorNum
-        | valorNum
+        |valorNum
 ;
-valorNum ::= NUM:nu {:System.out.println(nu.toString());:}
+
+valorNum ::= o:n1 {:listD.add(n1);:}
 ;
 

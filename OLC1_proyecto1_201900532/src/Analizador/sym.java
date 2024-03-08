@@ -8,10 +8,12 @@ package Analizador;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
+  public static final int MOD = 27;
   public static final int PYC = 10;
   public static final int CADENA = 16;
   public static final int CHAR = 3;
   public static final int SUM = 21;
+  public static final int MULTI = 25;
   public static final int PARIZQ = 23;
   public static final int END = 2;
   public static final int IDARR = 18;
@@ -24,14 +26,15 @@ public class sym {
   public static final int NUM = 15;
   public static final int COMA = 7;
   public static final int EOF = 0;
-  public static final int ADD = 25;
-  public static final int MINUS = 26;
+  public static final int DIV = 26;
   public static final int error = 1;
   public static final int CORIZQ = 19;
   public static final int FLIZQ = 5;
+  public static final int MEDIA = 28;
   public static final int CORDER = 20;
   public static final int ENDP = 11;
   public static final int ARRAY = 17;
+  public static final int MODA = 29;
   public static final int VAR = 12;
   public static final int RESTA = 22;
   public static final int DOUBLE = 4;
@@ -61,8 +64,11 @@ public class sym {
   "RESTA",
   "PARIZQ",
   "PARDER",
-  "ADD",
-  "MINUS"
+  "MULTI",
+  "DIV",
+  "MOD",
+  "MEDIA",
+  "MODA"
   };
 }
 

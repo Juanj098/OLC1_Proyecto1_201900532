@@ -36,12 +36,15 @@ whitespace = [ |\t|\r|\n]*
 "end" {return new Symbol(sym.END, yyline, yycolumn, yytext());}
 "arr" {return new Symbol(sym.ARRAY, yyline, yycolumn, yytext());}
 "SUM" {return new Symbol(sym.SUM, yyline, yycolumn, yytext());}
-"REST" {return new Symbol(sym.RESTA, yyline, yycolumn, yytext());}
+"RES" {return new Symbol(sym.RESTA, yyline, yycolumn, yytext());}
+"MUL" {return new Symbol(sym.MULTI, yyline, yycolumn, yytext());}
+"DIV" {return new Symbol(sym.DIV, yyline, yycolumn, yytext());}
+"MOD" {return new Symbol(sym.MOD, yyline, yycolumn, yytext());}
+"MEDIA" {return new Symbol(sym.MEDIA, yyline, yycolumn, yytext());}
+"MODA" {return new Symbol(sym.MODA, yyline, yycolumn, yytext());}
 
 //operadores
-"+" {return new Symbol(sym.ADD, yyline,yycolumn,yytext());}
-"-" {return new Symbol(sym.MINUS, yyline,yycolumn,yytext());}
-"*" {}
+
 
 //espacios en blanco
 {whitespace} {/* ignore */}
