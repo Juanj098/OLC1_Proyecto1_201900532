@@ -3,10 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Test;
+import Func.Function;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import Analizador.Parser;
+
 /**
  *
  * @author juanj
@@ -19,7 +21,7 @@ public class test {
                          "var:char[]::exampleCHAR<-\"es un ejemplo\"end;\n"+
                          "var:double::example123<-1.5end;\n"+
                          "var:char[]::hola<-\"juan jose\"end;\n"+
-                         "arr:char[]::@labels<-[\" label aprobar \" , \" P1 \" , \" P2 \"]end;\n"+
+                         "arr:char[]::@labels<-[\"label aprobar\" , \" P1 \" , \" P2 \"]end;\n"+
                          "arr:double::@D123<-[1.0,2.0,33.0]end;\n"+
                          "var:double::med1<-media([12.0,3.22,9.9])end;\n"+
                          "var:double::suma<-SUM(MUL(5.0,6.0),SUM(7.0,DIV(21.0,3.0)))end;\n"+
@@ -27,13 +29,17 @@ public class test {
                          "arr:double::@D1234<-[mul(6.0,4.0),res(5.0,3.0),sum(2.0,3.0)]end;\n"+
                          "var:double::med2<-media([sum(1.0,6.0),3.0,4.0])end;\n"+
                          "var:double::mod1<-moda([sum(1.0,6.0),3.0,4.0,3.0,4.0,4.0])end;\n"+
+                         "var:double::mediana1<-mediana([sum(1.0,6.0),3.0,5.0,3.2,2.0,4.0,3.9])end;\n"+
+                         "var:double::varianza1<-varianza([sum(1.0,6.0),3.0,5.0,3.2,2.0,4.0,3.9])end;\n"+
+                         "var:double::Max1<-max([sum(1.0,6.0),3.0,15.0,3.2,2.0,4.0,10.9])end;\n"+
                          "END PROGRAM";
 //        Generar();
         Analizar(prueba);
 
-//        for (int i = 0; i< list.size();i++){
-//            System.out.println(list.get(i));
-//        }
+        for (int i = 0; i< Function.list.size();i++){
+            System.out.println(Function.list.get(i));
+        }
+
         System.out.println("----TS----");
         for (int j =0; j < Parser.TS.size();j++){
             System.out.println(Parser.TS.get(j).toString());

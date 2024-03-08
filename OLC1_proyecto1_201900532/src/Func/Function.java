@@ -2,10 +2,8 @@ package Func;
 
 import Errores.Errores;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
+import java.util.Collection;
 
 public class Function {
     public static LinkedList<Errores> list = new LinkedList<>();
@@ -39,7 +37,36 @@ public class Function {
         }
         return moda;
     }
-
+    public static double Mediana(ArrayList<Double> lista){
+        Collections.sort(lista);
+        int n = lista.size();
+        if (n%2!=0){
+            return lista.get(n/2);
+        } else {
+            double v1 = lista.get((n/2)-1);
+            double v2 = lista.get((n/2));
+            return (v2+v1)/2.0;
+        }
+    }
+    public static double Varianza(ArrayList<Double> lista){
+        double suma = 0;
+        int n = lista.size();
+        for(int i=0;i<lista.size();i++){
+            suma+=lista.get(i);
+        }
+        double media = suma/n;
+        double sumacua =0.0;
+        for (int j=0;j<lista.size();j++){
+            sumacua += Math.pow(lista.get(j)-media,2);
+        }
+        double varianza = sumacua/n;
+        return varianza;
+    }
+    public static Double Max(ArrayList<Double> lista){
+        Collections.sort(lista);
+        int n = lista.size();
+        return lista.get(n-1);
+    }
 }
 
 

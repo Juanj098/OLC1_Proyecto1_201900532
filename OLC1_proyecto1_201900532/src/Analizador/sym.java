@@ -28,8 +28,11 @@ public class sym {
   public static final int EOF = 0;
   public static final int DIV = 26;
   public static final int error = 1;
+  public static final int MEDIANA = 30;
   public static final int CORIZQ = 19;
   public static final int FLIZQ = 5;
+  public static final int VARIANZA = 31;
+  public static final int MAX = 32;
   public static final int MEDIA = 28;
   public static final int CORDER = 20;
   public static final int ENDP = 11;
@@ -68,7 +71,10 @@ public class sym {
   "DIV",
   "MOD",
   "MEDIA",
-  "MODA"
+  "MODA",
+  "MEDIANA",
+  "VARIANZA",
+  "MAX"
   };
 }
 

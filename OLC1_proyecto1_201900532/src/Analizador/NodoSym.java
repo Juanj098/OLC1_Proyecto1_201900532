@@ -2,10 +2,10 @@ package Analizador;
 
 public class NodoSym {
     public String Nombre;
-    public String Valor;
+    public Object Valor;
     public String Tipo;
 
-    public NodoSym(String nombre, String valor, String tipo){
+    public NodoSym(String nombre, Object valor, String tipo){
         this.Nombre = nombre;
         this.Valor = valor;
         this.Tipo = tipo;

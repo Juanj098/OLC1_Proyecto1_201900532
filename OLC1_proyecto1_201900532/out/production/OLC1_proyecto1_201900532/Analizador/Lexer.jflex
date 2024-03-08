@@ -42,9 +42,9 @@ whitespace = [ |\t|\r|\n]*
 "MOD" {return new Symbol(sym.MOD, yyline, yycolumn, yytext());}
 "MEDIA" {return new Symbol(sym.MEDIA, yyline, yycolumn, yytext());}
 "MODA" {return new Symbol(sym.MODA, yyline, yycolumn, yytext());}
-
-//operadores
-
+"MEDIANA" {return new Symbol(sym.MEDIANA, yyline, yycolumn, yytext());}
+"VARIANZA" {return new Symbol(sym.VARIANZA, yyline, yycolumn, yytext());}
+"MAX" {return new Symbol(sym.MAX,yyline, yycolumn, yytext());}
 
 //espacios en blanco
 {whitespace} {/* ignore */}
