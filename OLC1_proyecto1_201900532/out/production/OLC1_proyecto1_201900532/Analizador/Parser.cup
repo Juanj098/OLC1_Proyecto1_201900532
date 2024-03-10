@@ -49,7 +49,6 @@ terminal String ID;
 terminal String PYC;
 terminal String ENDP;
 terminal String VAR;
-terminal String COMI;
 terminal string PROGRAM;
 terminal String NUM;
 terminal String CADENA;
@@ -69,6 +68,7 @@ terminal String MODA;
 terminal String MEDIANA;
 terminal String VARIANZA;
 terminal String MAX;
+terminal String MIN;
 
 //------> Declaración de no terminales
 non terminal star;
@@ -78,7 +78,7 @@ non terminal d;
 non terminal type_d;
 non terminal type_arr;
 non terminal pals;
-non terminal valorChar;
+non terminal String valorChar;
 non terminal valorNum;
 non terminal valorn;
 non terminal nums;
@@ -87,10 +87,14 @@ non terminal g;
 non terminal n;
 non terminal e;
 non terminal nm;
+non terminal dvc;
+non terminal Double rm;
+non terminal avp;
+non terminal avn;
 
 
 precedence left VAR,ARRAY;
-precedence left COMI, CADENA;
+//precedence left COMI, CADENA;
 precedence left SUM, RESTA;
 precedence left MULTI,DIV,MOD;
 precedence left NUM;
@@ -117,36 +121,74 @@ d ::= VAR DP type_d
       |ARRAY DP type_arr
 ;
 
-type_d ::= CHAR DPD ID:id FLIZQ COMI CADENA:cade COMI END PYC
-{:
-    System.out.println(id.toString()+"::"+cade.toString());
-    NodoSym Varchar = new NodoSym(id,cade,"char");
-    TS.add(Varchar);
-:}
+type_d ::= CHAR DPD ID:id FLIZQ dvc:cad END PYC
+     {:
+        System.out.println(id.toString()+"->"+cad.toString());
+        NodoSym Varchar = new NodoSym(id,cad,"char");
+        TS.add(Varchar);
+     :}
          |DOUBLE DPD ID:id FLIZQ
-{:
-    System.out.println(id); listE.clear();
- :} n:v
- {:
-    NodoSym Vardouble = new NodoSym(id,v,"double");
-    TS.add(Vardouble);
-    System.out.println(v);
- :}
+    {:
+        System.out.println(id); listE.clear();
+    :} n:v
+    {:
+        NodoSym Vardouble = new NodoSym(id,v,"double");
+        TS.add(Vardouble);
+        System.out.println(v);
+    :}
+;
+
+dvc::=CADENA:cade
+    {:
+        RESULT = cade;
+    :}
+    |ID:id
+    {:
+        Object val = null;
+        String type = "char";
+        for(NodoSym sym:TS){
+            if(sym.getNombre().equals(id) && sym.getTipo().equals(type)){
+                val = sym.getValor();
+                break;
+            }
+        }
+        if (val != null){
+            RESULT = val ;
+        } else {
+            RESULT = "NO encontrado o tipo  no valido";
+        }
+    :}
 ;
 
 n ::= NUM:number END PYC {:RESULT = number;:}
       |o:n1 END PYC {:RESULT = n1;:}
       |e:n2 END PYC {:RESULT = n2;:}
+      |ID:id END PYC
+      {:
+            Object val = null;
+            String type = "double";
+            for(NodoSym sym:TS){
+                if(sym.getNombre().equals(id) && sym.getTipo().equals(type)){
+                    val = sym.getValor();
+                    break;
+                }
+            }
+            if (val != null){
+                RESULT = val ;
+            } else {
+                RESULT = "NO encontrado o tipo  no valido";
+            }
+      :}
 ;
 
 e::=  MEDIA PARIZQ CORIZQ nm CORDER PARDER
-         {:
-         if (listE.size()>0){
-            double prom;
-            prom = Function.Media(listE);
-            RESULT = prom;
-         }
-         :}
+        {:
+            if (listE.size()>0){
+                double prom;
+                prom = Function.Media(listE);
+                RESULT = prom;
+            }
+        :}
      |MODA PARIZQ CORIZQ nm CORDER PARDER
         {:
         if (listE.size()>0){
@@ -179,6 +221,14 @@ e::=  MEDIA PARIZQ CORIZQ nm CORDER PARDER
             RESULT = max;
          }
       :}
+      |MIN PARIZQ CORIZQ nm CORDER PARDER
+      {:
+       if (listE.size()>0){
+            double min;
+            min = Function.Min(listE);
+            RESULT = min;
+       }
+      :}
 ;
 
 nm ::=  nm COMA valorn
@@ -196,25 +246,73 @@ o ::= SUM PARIZQ o:v1 COMA o:v2  PARDER  {:RESULT = v1 + v2;:}
     |NUM:n {:RESULT = Double.valueOf(n);:}
 ;
 
-type_arr ::= CHAR DPD IDARR:idarr {:System.out.println(idarr.toString());listS.clear();:} FLIZQ CORIZQ pals CORDER END PYC
+type_arr ::= CHAR DPD IDARR:id {:System.out.println(id);listS.clear();:} FLIZQ avp:list END PYC
             {:
-                System.out.println(listS);
-                NodoSym arrS = new NodoSym(idarr,listS,"Arreglo_char");
+                System.out.println(list);
+                NodoSym arrS = new NodoSym(id,list,"Arreglo_char");
                 TS.add(arrS);
             :}
-            |DOUBLE DPD IDARR:id {:System.out.println(id.toString()); listD.clear();:} FLIZQ CORIZQ nums CORDER END PYC
+            |DOUBLE DPD IDARR:id {:System.out.println(id);listD.clear();:} FLIZQ avn:list END PYC
             {:
-                System.out.println(listD);
-                NodoSym arrD = new NodoSym(id,listD,"Arreglo_double");
+                System.out.println(list);
+                NodoSym arrD = new NodoSym(id,list,"Arreglo_double");
                 TS.add(arrD);
             :}
+;
+
+avp ::= CORIZQ pals CORDER
+        {:
+            ArrayList<Object> listSClone = new ArrayList<>();
+            listSClone = (ArrayList)listS.clone();
+            RESULT = listSClone;
+        :}
+        |IDARR:id
+        {:
+            Object val = null;
+            String type = "Arreglo_char";
+            for(NodoSym sym:TS){
+                if(sym.getNombre().equals(id) && sym.getTipo().equals(type)){
+                    val = sym.getValor();
+                    break;
+                }
+            }
+            if(val != null){
+                RESULT = val;
+            }else{
+                RESULT = "dato no encontrado o tipo no valido";
+            }
+        :}
 ;
 
 pals::= pals COMA valorChar
         | valorChar
 ;
 
-valorChar ::= COMI CADENA:ca COMI {:listS.add(ca);:}
+valorChar ::= CADENA:ca {:listS.add(ca);:}
+;
+
+avn ::= CORIZQ nums CORDER
+        {:
+            ArrayList<Object> listDClone = new ArrayList<>();
+            listDClone = (ArrayList)listD.clone();
+            RESULT = listDClone;
+        :}
+        |IDARR:id
+        {:
+            Object val = null;
+            String type = "Arreglo_double";
+            for(NodoSym sym:TS){
+                if(sym.getNombre().equals(id) && sym.getTipo().equals(type)){
+                    val = sym.getValor();
+                    break;
+                }
+            }
+            if(val != null){
+                RESULT = val;
+            }else{
+                RESULT = "dato no encontrado o tipo no valido";
+            }
+        :}
 ;
 
 nums ::= nums COMA valorNum

@@ -67,6 +67,11 @@ public class Function {
         int n = lista.size();
         return lista.get(n-1);
     }
+    public static Double Min(ArrayList<Double> lista){
+        Collections.sort(lista);
+        int n = lista.size();
+        return lista.get(0);
+    }
 }
 
 

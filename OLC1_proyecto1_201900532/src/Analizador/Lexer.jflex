@@ -13,17 +13,19 @@ import static Func.Function.list;
 %column
 %char
 %ignorecase
+%function next_token
 
 %{
 %}
+
 VARI = [string|Double]
 Int = [0-9]+
 comi = [\"]
 Dec = [0-9]+\.[0-9]+
-VARID = [A-Za-z]+[0-9]*
-PALS = [a-zA-Z .]+[0-9]*
+ID = [A-Za-z]+[0-9]*
+PALS = [\"][A-Za-z\s]+[0-9]*[\"]
 varArr = @[A-Za-z]+[0-9]*
-whitespace = [ |\t|\r|\n]*
+whitespace = [\s|\t|\r|\n]*
 
 %%
 
@@ -44,8 +46,8 @@ whitespace = [ |\t|\r|\n]*
 "MODA" {return new Symbol(sym.MODA, yyline, yycolumn, yytext());}
 "MEDIANA" {return new Symbol(sym.MEDIANA, yyline, yycolumn, yytext());}
 "VARIANZA" {return new Symbol(sym.VARIANZA, yyline, yycolumn, yytext());}
-"MAX" {return new Symbol(sym.MAX,yyline, yycolumn, yytext());}
-
+"MAX" {return new Symbol(sym.MAX, yyline, yycolumn, yytext());}
+"MIN" {return new Symbol(sym.MIN, yyline, yycolumn, yytext());}
 //espacios en blanco
 {whitespace} {/* ignore */}
 
@@ -56,7 +58,6 @@ whitespace = [ |\t|\r|\n]*
 "<-" {return new Symbol(sym.FLIZQ, yyline, yycolumn, yytext());}
 "::" {return new Symbol(sym.DPD, yyline, yycolumn, yytext());}
 ";"  {return new Symbol(sym.PYC, yyline, yycolumn, yytext());}
-{comi} {return new Symbol(sym.COMI, yyline, yycolumn, yytext());}
 "[" {return new Symbol(sym.CORIZQ, yyline, yycolumn, yytext());}
 "]" {return new Symbol(sym.CORDER, yyline, yycolumn, yytext());}
 "," {return new Symbol(sym.COMA, yyline, yycolumn, yytext());}
@@ -65,10 +66,11 @@ whitespace = [ |\t|\r|\n]*
 
 
 //variables
-{VARID} {return new Symbol(sym.ID, yyline, yycolumn, yytext());}
+{ID} {return new Symbol(sym.ID, yyline, yycolumn, yytext());}
 {PALS} {return new Symbol(sym.CADENA, yyline, yycolumn, yytext());}
 {varArr} {return new Symbol(sym.IDARR, yyline, yycolumn, yytext());}
 {Dec} {return new Symbol(sym.NUM, yyline, yycolumn, yytext());}
+
 
 //errores
 

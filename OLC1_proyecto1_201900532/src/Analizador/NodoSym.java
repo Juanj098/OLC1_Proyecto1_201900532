@@ -11,6 +11,25 @@ public class NodoSym {
         this.Tipo = tipo;
     }
 
+    public Object getValor() {
+        return Valor;
+    }
+    public void setValor(Object valor) {
+        Valor = valor;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public String getTipo() {
+        return Tipo;
+    }
+
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
     @Override
     public String toString(){
         return "Nombre: "+Nombre+" - Valor: "+Valor+" - Tipo: "+Tipo;

@@ -4,6 +4,7 @@
  */
 package olc1_proyecto1_201900532;
 
+import javax.swing.*;
 /**
  *
  * @author juanj
@@ -15,6 +16,17 @@ public class OLC1_proyecto1_201900532 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame Frame = new OLC1FORM();
+                Frame.setSize(800,750);
+                Frame.setVisible(true);
+                Frame.setLocationRelativeTo(null);
+                Frame.setResizable(false);
+            }
+        });
+
     }
 
 }
