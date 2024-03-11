@@ -3,7 +3,6 @@ package Func;
 import Errores.Errores;
 
 import java.util.*;
-import java.util.Collection;
 
 public class Function {
     public static LinkedList<Errores> list = new LinkedList<>();

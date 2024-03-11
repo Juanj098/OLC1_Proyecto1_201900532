@@ -24,7 +24,7 @@ public class test {
                         "var:char[]::hola<- hola1 end;\n" +
                         "var:double::Example456<- Example123 end;\n" +
                         "arr:char[]::@labels<-[ \"hola\",\"x\",\"y\"] end;\n" +
-                        "arr:double::@D123<- [1.0,2.0,33.0] end;\n" +
+                        "arr:double::@D123<- [1.0,mul(2.0,8.0),33.0] end;\n" +
                         "var:double::med1<-media([12.0,3.22,9.9])end;\n" +
                         "var:double::suma<-SUM(MUL(5.0,6.0),SUM(7.0,DIV(21.0,3.0)))end;\n" +
                         "var:DOUBLE::ejMOD<-MOD(10.0,3.0)end;\n" +
@@ -39,6 +39,9 @@ public class test {
                         "arr:char[]::@labels2<- @labels end;\n" +
                         "arr:char[]::@labels2<- @prueba end;\n" +
                         "arr:double::@nums<- @D123 end;\n" +
+                        "console::print=\"hola\",med1,\"adios\" end;\n" +
+                        "console::print=\"hola1233\",varianza1,\"adiosxd\" end;\n" +
+                        "console::column=\"hola\"-> @D1234 end;"+
                         "END PROGRAM";
 //        Generar();
         Analizar(prueba);

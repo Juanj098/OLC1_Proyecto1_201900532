@@ -48,6 +48,9 @@ whitespace = [\s|\t|\r|\n]*
 "VARIANZA" {return new Symbol(sym.VARIANZA, yyline, yycolumn, yytext());}
 "MAX" {return new Symbol(sym.MAX, yyline, yycolumn, yytext());}
 "MIN" {return new Symbol(sym.MIN, yyline, yycolumn, yytext());}
+"CONSOLE" {return new Symbol(sym.CONSO, yyline, yycolumn, yytext());}
+"COLUMN" {return new Symbol(sym.COLUM, yyline, yycolumn, yytext());}
+"PRINT" {return new Symbol(sym.PRINT, yyline, yycolumn, yytext());}
 //espacios en blanco
 {whitespace} {/* ignore */}
 
@@ -56,6 +59,7 @@ whitespace = [\s|\t|\r|\n]*
 //Simbolos
 ":"  {return new Symbol(sym.DP, yyline, yycolumn, yytext());}
 "<-" {return new Symbol(sym.FLIZQ, yyline, yycolumn, yytext());}
+"->" {return new Symbol(sym.FLDER, yyline, yycolumn, yytext());}
 "::" {return new Symbol(sym.DPD, yyline, yycolumn, yytext());}
 ";"  {return new Symbol(sym.PYC, yyline, yycolumn, yytext());}
 "[" {return new Symbol(sym.CORIZQ, yyline, yycolumn, yytext());}
@@ -63,6 +67,7 @@ whitespace = [\s|\t|\r|\n]*
 "," {return new Symbol(sym.COMA, yyline, yycolumn, yytext());}
 "(" {return new Symbol(sym.PARIZQ, yyline, yycolumn, yytext());}
 ")" {return new Symbol(sym.PARDER, yyline, yycolumn, yytext());}
+"=" {return new Symbol(sym.IG, yyline,yycolumn, yytext());}
 
 
 //variables
