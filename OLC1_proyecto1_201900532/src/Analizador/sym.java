@@ -9,16 +9,22 @@ package Analizador;
 public class sym {
   /* terminals */
   public static final int CHAR = 3;
+  public static final int VALS = 44;
+  public static final int GHIS = 41;
+  public static final int GLINE = 40;
   public static final int CONSO = 34;
   public static final int DOUBLE = 4;
   public static final int RESTA = 22;
   public static final int ARRAY = 17;
+  public static final int LBEL = 43;
   public static final int ENDP = 12;
   public static final int DPD = 9;
+  public static final int GPIE = 38;
   public static final int CORDER = 20;
   public static final int FLIZQ = 5;
   public static final int DIV = 26;
   public static final int NUM = 15;
+  public static final int GBAR = 39;
   public static final int IG = 36;
   public static final int MIN = 33;
   public static final int ID = 10;
@@ -31,6 +37,9 @@ public class sym {
   public static final int CADENA = 16;
   public static final int MODA = 29;
   public static final int MOD = 27;
+  public static final int TY = 47;
+  public static final int TX = 46;
+  public static final int TITLE = 45;
   public static final int COLUM = 37;
   public static final int FLDER = 6;
   public static final int IDARR = 18;
@@ -39,8 +48,11 @@ public class sym {
   public static final int MULTI = 25;
   public static final int SUM = 21;
   public static final int MEDIA = 28;
+  public static final int EXEC = 42;
   public static final int PARDER = 24;
+  public static final int EJY = 49;
   public static final int CORIZQ = 19;
+  public static final int EJX = 48;
   public static final int MAX = 32;
   public static final int VAR = 13;
   public static final int DP = 7;
@@ -84,7 +96,19 @@ public class sym {
   "CONSO",
   "PRINT",
   "IG",
-  "COLUM"
+  "COLUM",
+  "GPIE",
+  "GBAR",
+  "GLINE",
+  "GHIS",
+  "EXEC",
+  "LBEL",
+  "VALS",
+  "TITLE",
+  "TX",
+  "TY",
+  "EJX",
+  "EJY"
   };
 }
 

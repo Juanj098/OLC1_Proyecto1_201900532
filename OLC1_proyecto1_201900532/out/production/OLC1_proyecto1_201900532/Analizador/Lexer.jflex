@@ -23,7 +23,7 @@ Int = [0-9]+
 comi = [\"]
 Dec = [0-9]+\.[0-9]+
 ID = [A-Za-z]+[0-9]*
-PALS = [\"][A-Za-z\s]+[0-9]*[\"]
+PALS = [\"][0-9]*[A-Za-z\s]+[\-\@\?\^\&\#\_]*[0-9]*[\"]
 varArr = @[A-Za-z]+[0-9]*
 whitespace = [\s|\t|\r|\n]*
 
@@ -51,6 +51,19 @@ whitespace = [\s|\t|\r|\n]*
 "CONSOLE" {return new Symbol(sym.CONSO, yyline, yycolumn, yytext());}
 "COLUMN" {return new Symbol(sym.COLUM, yyline, yycolumn, yytext());}
 "PRINT" {return new Symbol(sym.PRINT, yyline, yycolumn, yytext());}
+"GRAPHPIE" {return new Symbol(sym.GPIE, yyline, yycolumn, yytext());}
+"GRAPHBAR" {return new Symbol(sym.GBAR, yyline, yycolumn, yytext());}
+"GRAPHLINE" {return new Symbol(sym.GLINE, yyline, yycolumn, yytext());}
+"HISTOGRAM" {return new Symbol(sym.GHIS, yyline, yycolumn, yytext());}
+"EXEC" {return new Symbol(sym.EXEC, yyline, yycolumn, yytext());}
+"LABEL" {return new Symbol(sym.LBEL, yyline, yycolumn, yytext());}
+"VALUES" {return new Symbol(sym.VALS, yyline, yycolumn, yytext());}
+"TITULO" {return new Symbol(sym.TITLE, yyline, yycolumn, yytext());}
+"EJEX"   {return new Symbol(sym.EJX, yyline, yycolumn, yytext());}
+"EJEY"   {return new Symbol(sym.EJY, yyline, yycolumn, yytext());}
+"TITULOX" {return new Symbol(sym.TX, yyline, yycolumn, yytext());}
+"TITULOY" {return new Symbol(sym.TY, yyline, yycolumn, yytext());}
+
 //espacios en blanco
 {whitespace} {/* ignore */}
 

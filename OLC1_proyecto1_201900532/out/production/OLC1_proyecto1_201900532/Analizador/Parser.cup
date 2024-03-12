@@ -27,15 +27,20 @@ parser code
     public static ArrayList<NodoSym> TS = new ArrayList<>();
     public static ArrayList<Double> listD = new ArrayList<>();
     public static ArrayList<String> listS = new ArrayList<>();
+    public static ArrayList<String> listSG = new ArrayList<>();
+    public static ArrayList<Double> listDG = new ArrayList<>();
     public static  String cadenaExp ="";
     public static  String cadenaArr ="";
+    public static ArrayList<RESP> resultad = new ArrayList<>();
 
 :};
 
 
 //------> Codigo para las acciones gramaticales (no tocar)
 action code
-{:  :}
+{:
+
+:}
 
 
 //------> Declaración de terminales
@@ -76,6 +81,18 @@ terminal String CONSO;
 terminal String PRINT;
 terminal String IG;
 terminal String COLUM;
+terminal String GPIE;
+terminal String GBAR;
+terminal String GLINE;
+terminal String GHIS;
+terminal String EXEC;
+terminal String LBEL;
+terminal String VALS;
+terminal String TITLE;
+terminal String TX;
+terminal String TY;
+terminal String EJX;
+terminal String EJY;
 
 //------> Declaración de no terminales
 non terminal star;
@@ -89,8 +106,6 @@ non terminal String valorChar;
 non terminal valorNum;
 non terminal valorn;
 non terminal nums;
-non terminal numbers;
-non terminal number;
 non terminal Double o;
 non terminal g;
 non terminal Double n;
@@ -107,14 +122,31 @@ non terminal title;
 non terminal arr;
 non terminal arrnum;
 non terminal arrchar;
-non terminal words;
-non terminal word;
+non terminal DGRAHPP sentgp;
+non terminal DGRAHPB sentgb;
+non terminal DGRAHPL sentgl;
+non terminal DGRAHPH sentgh;
+non terminal ArrayList<String> lbel;
+non terminal ArrayList<Double> values;
+non terminal titl;
+non terminal pls;
+non terminal vls;
+non terminal ArrayList<String> ejx;
+non terminal ArrayList<Double> ejy;
+non terminal String tx;
+non terminal String ty;
 
+
+precedence left GHIS, PARIZQ;
+precedence left GLINE, PARIZQ;
+precedence left GBAR, PARIZQ;
+precedence left GPIE, PARIZQ;
 precedence left CONSO;
 precedence left VAR,ARRAY;
 precedence left SUM, RESTA;
 precedence left MULTI,DIV,MOD;
 precedence left NUM;
+precedence left END;
 
 
 //------> Definir Simbolo Inicial
@@ -274,6 +306,26 @@ o ::= SUM PARIZQ o:v1 COMA o:v2  PARDER  {:RESULT = v1 + v2;:}
     |DIV PARIZQ o:v1 COMA o:v2 PARDER {:RESULT = v1 / v2;:}
     |MOD PARIZQ o:v1 COMA o:v2 PARDER {:RESULT = v1 % v2;:}
     |NUM:n {:RESULT = Double.valueOf(n);:}
+    |ID:id
+    {:
+       Double num = null;
+       String type = "double";
+       for (NodoSym sym : TS) {
+           if (sym.getNombre().equals(id) && sym.getTipo().equals(type)) {
+               Object val = sym.getValor();
+               if (val instanceof ValorDouble) {
+                   num = ((ValorDouble) val).getValor();
+                   break;
+               }
+           }
+       }
+       if (num != null) {
+           RESULT = num;
+       } else {
+           System.out.println("Dato no encontrado");
+       }
+
+    :}
 ;
 
 type_arr ::= CHAR DPD IDARR:id {:System.out.println(id);listS.clear();:} FLIZQ avp:list END PYC
@@ -361,12 +413,18 @@ pr ::= printexp
 ;
 
 printexp ::= CONSO DPD PRINT {:cadenaExp="";:} IG exp END PYC
-{:System.out.println(cadenaExp);:}
+{:
+    RESP r = new RESP(new respString(cadenaExp));
+    resultad.add(r);
+    System.out.println(cadenaExp);
+:}
 ;
 
 printarr::= CONSO DPD COLUM {:cadenaArr = "<--------------->\n";:} IG title FLDER arr END PYC
 {:
     cadenaArr = cadenaArr+"<--------------->";
+    RESP r = new RESP(new respString(cadenaArr));
+    resultad.add(r);
     System.out.println(cadenaArr);
 :}
 ;
@@ -377,7 +435,7 @@ title::= CADENA:c
         :}
         |IDARR:id
         {:
-        cadenaArr = cadenaArr+"   "+id+"   ";
+        cadenaArr = cadenaArr+"   "+id+"   "+"\n";
 
         :}
 ;
@@ -390,35 +448,75 @@ arr ::=IDARR:id
                       val = sym.getValor();
                       if (val instanceof ArrayString) {
                           ArrayList<String> arr = ((ArrayString) val).getValor();
-                          for(int i =0;i>arr.size();i++){
+                          for(int i =0;i<arr.size();i++){
                               cadenaArr = cadenaArr+arr.get(i)+"\n";
                           }
                       } else if (val instanceof ArrayDouble) {
                           ArrayList<Double> arr = ((ArrayDouble) val).getValor();
-                          for(int i =0;i>arr.size();i++){
+                          for(int i =0;i<arr.size();i++){
                                 cadenaArr = cadenaArr+arr.get(i).toString()+"\n";
                           }
-                      break;
                       }
+                      break;
                   }
               }
         :}
-       |arrnum
-       |arrchar
+       |CORIZQ arrnum CORDER
+       |CORIZQ arrchar CORDER
 ;
 
-arrchar ::= CORIZQ words CORDER
+arrnum ::= arrnum COMA NUM:n
+            {:cadenaArr = cadenaArr+n+"\n";:}
+           |NUM:n
+            {:cadenaArr = cadenaArr+n+"\n";:}
 ;
 
-arrnum ::= CORIZQ numbers CORDER
-;
-
-words ::= words COMA CADENA
-          |CADENA
-;
-
-numbers ::= numbers COMA NUM
-            |NUM
+arrchar::=arrchar COMA CADENA:c
+        {:cadenaArr = cadenaArr+c+"\n";:}
+        |arrchar COMA ID:id
+        {:
+            Object val = null;
+            String charr = null;
+            for(NodoSym sym:TS){
+                if(sym.getNombre().equals(id)){
+                    val = sym.getValor();
+                    if (val instanceof ValorString) {
+                        charr = ((ValorString) val).getValor();
+                    } else if (val instanceof ValorDouble) {
+                        charr = ((ValorDouble) val).getValor().toString();
+                        break;
+                    }
+                }
+            }
+            if(charr!=null){
+                cadenaArr = cadenaArr+charr+"\n";
+            } else {
+                System.out.println("dato no encontrado");
+            }
+        :}
+        |CADENA:c
+        {:cadenaArr = cadenaArr+c+"\n";:}
+        |ID:id
+        {:
+            Object val = null;
+            String charr = null;
+            for(NodoSym sym:TS){
+                if(sym.getNombre().equals(id)){
+                    val = sym.getValor();
+                    if (val instanceof ValorString) {
+                        charr = ((ValorString) val).getValor();
+                    } else if (val instanceof ValorDouble) {
+                        charr = ((ValorDouble) val).getValor().toString();
+                        break;
+                    }
+                }
+            }
+            if(charr!=null){
+                cadenaArr = cadenaArr+charr+"\n";
+            } else {
+                System.out.println("dato no encontrado");
+            }
+        :}
 ;
 
 exp ::= exp COMA:c CADENA:cad
@@ -466,4 +564,186 @@ exp ::= exp COMA:c CADENA:cad
                 System.out.println("dato no encontrado");
             }
         :}
+;
+
+g::= GPIE PARIZQ sentgp:d EXEC GPIE END PYC PARDER END PYC
+    {:FUNC_GRAFICAR.GPIE(d);:}
+    |GBAR PARIZQ sentgb:d EXEC GBAR END PYC PARDER END PYC
+    {:FUNC_GRAFICAR.GBAR(d);:}
+    |GLINE PARIZQ sentgl:d EXEC GLINE END PYC PARDER END PYC
+    {:FUNC_GRAFICAR.GLINE(d);:}
+    |GHIS PARIZQ sentgh:d EXEC GHIS END PYC PARDER END PYC
+    {:
+        FUNC_GRAFICAR.GHIS(d);
+        String resp = FUNC_GRAFICAR.PrintTable(d);
+        RESP r = new RESP(new respString(resp));
+        resultad.add(r);
+        System.out.println(resp);
+    :}
+;
+
+sentgp ::= lbel:ac values:ad titl:t
+    {:
+        System.out.println("-GPIE-");
+        DGRAHPP pie = new DGRAHPP((String) t.toString(),ac,ad);
+        RESULT = pie;
+
+    :}
+;
+
+lbel ::= LBEL DPD CHAR IG {:listSG.clear();:} CORIZQ pls CORDER END PYC
+    {:
+        ArrayList sec_listSG = new ArrayList();
+        sec_listSG = (ArrayList)listSG.clone();
+        RESULT = sec_listSG;
+    :}
+;
+
+pls ::= pls COMA CADENA:pl
+    {:listSG.add(pl);:}
+    |pls COMA  ID:id
+    {:
+        String charr = null;
+        String type = "char";
+        for (NodoSym sym : TS) {
+            if (sym.getNombre().equals(id) && sym.getTipo().equals(type)) {
+                Object val = sym.getValor();
+                if (val instanceof ValorString) {
+                    charr = ((ValorString) val).getValor();
+                    break;
+                }
+            }
+        }
+        if (charr != null) {
+            listSG.add(charr);
+        } else {
+            System.out.println("Dato no encontrado");
+        }
+    :}
+    |CADENA:pl
+    {:listSG.add(pl);:}
+    |ID:id
+    {:
+        String charr = null;
+        String type = "char";
+        for (NodoSym sym : TS) {
+            if (sym.getNombre().equals(id) && sym.getTipo().equals(type)) {
+                Object val = sym.getValor();
+                if (val instanceof ValorString) {
+                    charr = ((ValorString) val).getValor();
+                    break;
+                }
+            }
+        }
+        if (charr != null) {
+            listSG.add(charr);
+        } else {
+            System.out.println("Dato no encontrado");
+        }
+    :}
+;
+
+values ::= VALS DPD DOUBLE IG {:listDG.clear();:} CORIZQ vls CORDER END PYC
+    {:
+        ArrayList sec_listDG = new ArrayList();
+        sec_listDG = (ArrayList)listDG.clone();
+        RESULT = sec_listDG;
+    :}
+;
+
+vls ::= vls COMA NUM:vl
+        {:listDG.add(Double.parseDouble(vl));:}
+        |vls COMA ID:id
+        {:
+            Double num = null;
+            String type = "double";
+            for (NodoSym sym : TS) {
+                if (sym.getNombre().equals(id) && sym.getTipo().equals(type)) {
+                    Object val = sym.getValor();
+                    if (val instanceof ValorDouble) {
+                        num = ((ValorDouble) val).getValor();
+                        break;
+                    }
+                }
+            }
+            if (num != null) {
+                listDG.add(num);
+            } else {
+                System.out.println("Dato no encontrado");
+            }
+        :}
+        |NUM:vl
+        {:listDG.add(Double.parseDouble(vl));:}
+        |ID:id
+        {:
+            Double num = null;
+            String type = "double";
+            for (NodoSym sym : TS) {
+                if (sym.getNombre().equals(id) && sym.getTipo().equals(type)) {
+                    Object val = sym.getValor();
+                    if (val instanceof ValorDouble) {
+                        num = ((ValorDouble) val).getValor();
+                        break;
+                    }
+                }
+            }
+            if (num != null) {
+               listDG.add(num);
+            } else {
+                System.out.println("Dato no encontrado");
+            }
+        :}
+;
+
+titl ::= TITLE DPD CHAR IG CADENA:ca END PYC
+    {:RESULT = ca;:}
+;
+
+sentgb ::= titl:t ejx:ejx ejy:ejy tx:tx ty:ty
+   {:
+        System.out.println("-GBAR-");
+        DGRAHPB bar = new DGRAHPB((String) t.toString(),tx,ty,ejx,ejy);
+        RESULT = bar;
+
+    :}
+;
+
+ejx::= EJX DPD CHAR {:listSG.clear();:} IG CORIZQ pls CORDER END PYC
+    {:
+        ArrayList sec_listSG = new ArrayList();
+        sec_listSG = (ArrayList)listSG.clone();
+        RESULT = sec_listSG;
+    :}
+;
+
+ejy::= EJY DPD DOUBLE IG {:listDG.clear();:} CORIZQ vls CORDER END PYC
+    {:
+        ArrayList sec_listDG = new ArrayList();
+        sec_listDG = (ArrayList)listDG.clone();
+        RESULT = sec_listDG;
+    :}
+;
+
+tx::= TX DPD CHAR IG CADENA:c END PYC
+    {:RESULT = c;:}
+;
+
+ty::= TY DPD CHAR IG CADENA:c END PYC
+    {:RESULT = c;:}
+;
+
+sentgl ::= titl:t ejx:ejx ejy:ejy tx:tx ty:ty
+    {:
+        System.out.println("-GLINE-");
+        DGRAHPL line = new DGRAHPL((String) t.toString(),tx,ty,ejx,ejy);
+        RESULT = line;
+    :}
+;
+
+sentgh ::= titl:t values:ad
+    {:
+        System.out.println("-GHIS-");
+        DGRAHPH his = new DGRAHPH((String) t.toString(),ad);
+        RESULT = his;
+    :}
 ;
