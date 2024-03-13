@@ -8,6 +8,7 @@ package Analizador;
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import Func.Function;
+import Errores.Errores;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -446,6 +447,8 @@ public class Parser extends java_cup.runtime.lr_parser {
     public void syntax_error(Symbol s)
     {
             System.err.println("Error Sintactico: "+ s.value + " - Fila: " + s.right + " - Columna: " + s.left + ". Recuperado" );
+            Errores errorS = new Errores(s.right,s.left,s.value.toString(),"Sintactico");
+            Function.list_err.add(errorS);
     }
 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception
@@ -459,6 +462,7 @@ public class Parser extends java_cup.runtime.lr_parser {
     public static ArrayList<String> listS = new ArrayList<>();
     public static ArrayList<String> listSG = new ArrayList<>();
     public static ArrayList<Double> listDG = new ArrayList<>();
+    public static ArrayList<String> GRAPHS = new ArrayList<>();
     public static  String cadenaExp ="";
     public static  String cadenaArr ="";
     public static ArrayList<RESP> resultad = new ArrayList<>();

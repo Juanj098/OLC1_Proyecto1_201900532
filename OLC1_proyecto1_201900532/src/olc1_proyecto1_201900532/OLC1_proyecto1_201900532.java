@@ -20,7 +20,7 @@ public class OLC1_proyecto1_201900532 {
             @Override
             public void run() {
                 JFrame Frame = new OLC1FORM();
-                Frame.setSize(800,750);
+                Frame.setSize(850,750);
                 Frame.setVisible(true);
                 Frame.setLocationRelativeTo(null);
                 Frame.setResizable(false);

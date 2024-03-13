@@ -1,11 +1,13 @@
 package Func;
 
+import Analizador.Token;
 import Errores.Errores;
 
 import java.util.*;
 
 public class Function {
-    public static LinkedList<Errores> list = new LinkedList<>();
+    public static LinkedList<Errores> list_err = new LinkedList<>();
+    public static LinkedList<Token> list_Token = new LinkedList<>();
 
     public static double Media(ArrayList<Double> lista){
         double sumatoria = 0;

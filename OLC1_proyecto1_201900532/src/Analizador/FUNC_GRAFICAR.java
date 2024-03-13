@@ -28,7 +28,9 @@ public class FUNC_GRAFICAR {
                 false
         );
         String namefile = obj.getTitulo().replace("\"","");
+        String path = "C:/Users/juanj/OneDrive/Escritorio/Compiladores 1/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/GRPHS/"+namefile+".png";
         File outputFile = new File("C:/Users/juanj/OneDrive/Escritorio/Compiladores 1/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/GRPHS/"+namefile+".png");
+        Parser.GRAPHS.add(path);
         ChartUtilities.saveChartAsPNG(outputFile,chart,800,800);
 
     }
@@ -46,6 +48,8 @@ public class FUNC_GRAFICAR {
 
         String namefile = obj.getTitulo().replace("\"","");
         File outputFile = new File("C:/Users/juanj/OneDrive/Escritorio/Compiladores 1/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/GRPHS/"+namefile+".png");
+        String path = "C:/Users/juanj/OneDrive/Escritorio/Compiladores 1/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/GRPHS/"+namefile+".png";
+        Parser.GRAPHS.add(path);
         ChartUtilities.saveChartAsPNG(outputFile,chart,800,800);
     }
     public static void GLINE(DGRAHPL obj) throws IOException {
@@ -62,6 +66,8 @@ public class FUNC_GRAFICAR {
 
         String namefile = obj.getTitulo().replace("\"","");
         File outputFile = new File("C:/Users/juanj/OneDrive/Escritorio/Compiladores 1/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/GRPHS/"+namefile+".png");
+        String path = "C:/Users/juanj/OneDrive/Escritorio/Compiladores 1/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/GRPHS/"+namefile+".png";
+        Parser.GRAPHS.add(path);
         ChartUtilities.saveChartAsPNG(outputFile,chart,800,800);
     }
     public static void GHIS(DGRAHPH obj) throws IOException {
@@ -83,6 +89,8 @@ public class FUNC_GRAFICAR {
         );
         String namefile = obj.getTitulo().replace("\"","");
         File outputFile = new File("C:/Users/juanj/OneDrive/Escritorio/Compiladores 1/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/GRPHS/"+namefile+".png");
+        String path = "C:/Users/juanj/OneDrive/Escritorio/Compiladores 1/OLC1_Proyecto1_201900532/OLC1_proyecto1_201900532/src/GRPHS/"+namefile+".png";
+        Parser.GRAPHS.add(path);
         ChartUtilities.saveChartAsPNG(outputFile,chart,800,800);
     }
     public static Map<Double, Integer> countDuplicates(ArrayList<Double> list) {

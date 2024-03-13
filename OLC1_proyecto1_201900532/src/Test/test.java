@@ -19,6 +19,10 @@ public class test {
     public static void main(String[] args) throws IOException{
         System.out.println("--------------------------");
         String prueba = "PROGRAM\n" +
+                        "!hola\n"+
+                        "<!hola es\n"+
+                        "un\n"+
+                        "comentario!>\n"+
                         "var:char[]::ExampleCHAR<-\"hola ejemplo\" end;\n" +
                         "var:double::Example123<- 1.5 end;\n" +
                         "var:char[]::hola1<-\"juan jose\" end;\n" +
@@ -75,8 +79,8 @@ public class test {
         Generar();
 //        Analizar(prueba);
 //
-        for (int i = 0; i< Function.list.size();i++){
-            System.out.println(Function.list.get(i));
+        for (int i = 0; i< Function.list_err.size();i++){
+            System.out.println(Function.list_err.get(i));
         }
 
         System.out.println("----TS----");

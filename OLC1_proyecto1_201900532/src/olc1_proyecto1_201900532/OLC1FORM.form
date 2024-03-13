@@ -3,24 +3,27 @@
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="545" height="400"/>
+      <xy x="20" y="20" width="765" height="482"/>
     </constraints>
     <properties>
       <background color="-14518695"/>
     </properties>
     <border type="none"/>
     <children>
-      <tabbedpane id="d7fe5" binding="ventana">
+      <tabbedpane id="b841a" binding="tabbedPane1" default-binding="true">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <autoscrolls value="false"/>
+          <background color="-11777975"/>
+        </properties>
         <border type="none"/>
         <children>
-          <grid id="63fc3" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="5" left="5" bottom="5" right="5"/>
+          <grid id="15bb1" binding="paneAnalizar" layout-manager="GridLayoutManager" row-count="2" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="ANALIZADOR"/>
             </constraints>
@@ -29,41 +32,30 @@
             </properties>
             <border type="none"/>
             <children>
-              <toolbar id="abdb7">
+              <toolbar id="e0440">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="-1" height="20"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-11777975"/>
+                </properties>
                 <border type="none"/>
                 <children>
-                  <component id="eb3b" class="javax.swing.JButton" binding="ABRIRDfButton" default-binding="true">
+                  <component id="a93bb" class="javax.swing.JButton" binding="ABRIRDfButton">
                     <constraints/>
                     <properties>
-                      <horizontalAlignment value="0"/>
-                      <text value="ABRIR .df"/>
+                      <text value="Abrir .df"/>
                     </properties>
                   </component>
-                  <component id="48a6e" class="javax.swing.JButton" binding="EJECUTARButton" default-binding="true">
+                  <component id="e64a" class="javax.swing.JButton" binding="EJECUTARButton" default-binding="true">
                     <constraints/>
                     <properties>
                       <text value="EJECUTAR"/>
                     </properties>
                   </component>
-                  <component id="d9cc6" class="javax.swing.JButton" binding="NUEVOARCHIVOButton" default-binding="true">
-                    <constraints/>
-                    <properties>
-                      <text value="NUEVO ARCHIVO"/>
-                    </properties>
-                  </component>
-                  <component id="f8296" class="javax.swing.JButton" binding="GUARDARButton" default-binding="true">
-                    <constraints/>
-                    <properties>
-                      <text value="GUARDAR"/>
-                    </properties>
-                  </component>
-                  <component id="d64e6" class="javax.swing.JButton" binding="SALIRButton" default-binding="true">
+                  <component id="17468" class="javax.swing.JButton" binding="SALIRButton" default-binding="true">
                     <constraints/>
                     <properties>
                       <text value="SALIR"/>
@@ -71,90 +63,186 @@
                   </component>
                 </children>
               </toolbar>
-              <scrollpane id="667a7">
+              <grid id="fc8ae" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-11777975"/>
+                  <foreground color="-11777975"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <scrollpane id="223b4">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="cce54" class="javax.swing.JTextArea" binding="txt1">
+                        <constraints/>
+                        <properties>
+                          <background color="-10395269"/>
+                          <editable value="true"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <scrollpane id="bd7c1">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="59529" class="javax.swing.JTextArea" binding="txt2">
+                        <constraints/>
+                        <properties>
+                          <background color="-7776874"/>
+                          <editable value="false"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+              <grid id="37f42" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="d1aee" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
-                    <constraints/>
-                    <properties/>
-                  </component>
+                  <grid id="317c5" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-6215084"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="d47d4" class="javax.swing.JLabel" binding="imglbel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <toolbar id="ae311">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="-1" height="20"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <background color="-6215084"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <hspacer id="2bd90">
+                        <constraints/>
+                      </hspacer>
+                      <component id="5c2f2" class="javax.swing.JButton" binding="btnAnt">
+                        <constraints/>
+                        <properties>
+                          <icon value="resources/anterior.png"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <component id="9ed23" class="javax.swing.JToolBar$Separator">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                      <component id="dcf8a" class="javax.swing.JButton" binding="button1" default-binding="true">
+                        <constraints/>
+                        <properties>
+                          <icon value="resources/actualizar-flecha.png"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <component id="e5feb" class="javax.swing.JToolBar$Separator">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                      <component id="a28c2" class="javax.swing.JButton" binding="btnSig">
+                        <constraints/>
+                        <properties>
+                          <icon value="resources/flecha-correcta.png"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <hspacer id="12e6d">
+                        <constraints/>
+                      </hspacer>
+                    </children>
+                  </toolbar>
                 </children>
-              </scrollpane>
-              <scrollpane id="c7734">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="21b7d" class="javax.swing.JTextArea" binding="textArea2" default-binding="true">
-                    <constraints/>
-                    <properties/>
-                  </component>
-                </children>
-              </scrollpane>
+              </grid>
             </children>
           </grid>
-          <grid id="4b71" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="64979" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="REPORTES"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-864225"/>
+            </properties>
             <border type="none"/>
             <children>
-              <component id="44d8e" class="javax.swing.JTable" binding="table1" default-binding="true">
+              <toolbar id="250d1">
                 <constraints>
-                  <grid row="1" column="0" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="20"/>
                   </grid>
                 </constraints>
-                <properties/>
-              </component>
-              <component id="66800" class="javax.swing.JTable" binding="table2" default-binding="true">
-                <constraints>
-                  <grid row="1" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
-              <component id="eeedc" class="javax.swing.JTable" binding="table3" default-binding="true">
-                <constraints>
-                  <grid row="1" column="2" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
-              <component id="902dd" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
-                </constraints>
                 <properties>
-                  <text value="TABLA DE  ERRORES"/>
+                  <alignmentX value="1.0"/>
+                  <inheritsPopupMenu value="true"/>
+                  <margin top="1" left="15" bottom="1" right="15"/>
+                  <orientation value="0"/>
                 </properties>
-              </component>
-              <component id="87a40" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="TABLA DE SIMBOLOS"/>
-                </properties>
-              </component>
-              <component id="4edeb" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="TABLA DE TOKENS"/>
-                </properties>
-              </component>
+                <border type="none"/>
+                <children>
+                  <component id="d10c4" class="javax.swing.JButton" binding="REPORTEDEERRORESButton" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <icon value="resources/navegador.png"/>
+                      <text value="REPORTE DE ERRORES"/>
+                    </properties>
+                  </component>
+                  <component id="d1fbc" class="javax.swing.JToolBar$Separator">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                  <component id="31be5" class="javax.swing.JButton" binding="REPORTEDETOKENSButton" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <icon value="resources/fichas-de-eor.png"/>
+                      <text value="REPORTE DE TOKENS"/>
+                    </properties>
+                  </component>
+                  <component id="cc197" class="javax.swing.JToolBar$Separator">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                  <component id="335d3" class="javax.swing.JButton" binding="REPORTEDETABLADEButton" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <icon value="resources/contenido-de-la-tabla.png"/>
+                      <text value="REPORTE DE TABLA DE SIMBOLOS"/>
+                    </properties>
+                  </component>
+                </children>
+              </toolbar>
             </children>
           </grid>
         </children>

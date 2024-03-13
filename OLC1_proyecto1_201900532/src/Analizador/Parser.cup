@@ -4,6 +4,8 @@ package Analizador;
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import Func.Function;
+import Errores.Errores;
+
 
 
 //------> Codigo para el parser
@@ -16,6 +18,8 @@ parser code
     public void syntax_error(Symbol s)
     {
             System.err.println("Error Sintactico: "+ s.value + " - Fila: " + s.right + " - Columna: " + s.left + ". Recuperado" );
+            Errores errorS = new Errores(s.right,s.left,s.value.toString(),"Sintactico");
+            Function.list_err.add(errorS);
     }
 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception
@@ -29,6 +33,7 @@ parser code
     public static ArrayList<String> listS = new ArrayList<>();
     public static ArrayList<String> listSG = new ArrayList<>();
     public static ArrayList<Double> listDG = new ArrayList<>();
+    public static ArrayList<String> GRAPHS = new ArrayList<>();
     public static  String cadenaExp ="";
     public static  String cadenaArr ="";
     public static ArrayList<RESP> resultad = new ArrayList<>();
