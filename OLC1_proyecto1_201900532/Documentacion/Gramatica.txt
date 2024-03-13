@@ -1,0 +1,79 @@
+star ::= PROGRAM <program> ENDP ;
+
+<program> ::= <program> <lins> | <lins> ;
+
+<lins> ::= <lins> <d> | <lins> <g> | <lins> <pr> | <d> | <g> | <pr> ;
+
+<d> ::= VAR DP <type_d> | ARRAY DP <type_arr> ;
+
+<type_d> ::= CHAR DPD ID FLIZQ <dvc> END PYC | DOUBLE DPD ID FLIZQ <n> END PYC ;
+
+<dvc> ::= CADENA | ID ;
+
+<n> ::= NUM END PYC | <o> END PYC | <e> END PYC | ID END PYC ;
+
+<e> ::= MEDIA PARIZQ CORIZQ <nm> CORDER PARDER | MODA PARIZQ CORIZQ <nm> CORDER PARDER | MEDIANA PARIZQ CORIZQ <nm> CORDER PARDER | VARIANZA PARIZQ CORIZQ <nm> CORDER PARDER | MAX PARIZQ CORIZQ <nm> CORDER PARDER | MIN PARIZQ CORIZQ <nm> CORDER PARDER ;
+
+<nm> ::= <nm> COMA <valorn> | <valorn> ;
+
+<valorn> ::= <o> ;
+
+<o> ::= SUM PARIZQ <o> COMA <o> PARDER | RESTA PARIZQ <o> COMA <o> PARDER | MULTI PARIZQ <o> COMA <o> PARDER | DIV PARIZQ <o> COMA <o> PARDER | MOD PARIZQ <o> COMA <o> PARDER | NUM | ID ;
+
+<type_arr> ::= CHAR DPD IDARR FLIZQ <avp> END PYC | DOUBLE DPD IDARR FLIZQ <avn> END PYC ;
+
+<avp> ::= CORIZQ <pals> CORDER | IDARR ;
+
+<pals> ::= <pals> COMA <valorChar> | <valorChar> ;
+
+<valorChar> ::= CADENA ;
+
+<avn> ::= CORIZQ <nums> CORDER | IDARR ;
+
+<nums> ::= <nums> COMA <valorNum> | <valorNum> ;
+
+<valorNum> ::= <o> ;
+
+<pr> ::= printexp | printarr ;
+
+<printexp> ::= CONSO DPD PRINT IG <exp> END PYC ;
+
+<printarr> ::= CONSO DPD COLUM IG <title> FLDER <arr> END PYC ;
+
+<title> ::= CADENA ;
+
+<arr> ::= IDARR | CORIZQ <arrnum> CORDER | CORIZQ <arrchar> CORDER ;
+
+<arrnum> ::= <arrnum> COMA NUM | NUM ;
+
+<arrchar> ::= <arrchar> COMA CADENA | <arrchar> COMA ID | CADENA | ID ;
+
+<exp> ::= <exp> COMA CADENA | <exp> COMA ID | CADENA | ID ;
+
+<g> ::= GPIE PARIZQ <sentgp> EXEC GPIE END PYC PARDER END PYC | GBAR PARIZQ <sentgb> EXEC GBAR END PYC PARDER END PYC | GLINE PARIZQ <sentgl> EXEC GLINE END PYC PARDER END PYC | GHIS PARIZQ <sentgh> EXEC GHIS END PYC PARDER END PYC ;
+
+<sentgp> ::= <lbel> <values> <titl> ;
+
+<lbel> ::= LBEL DPD CHAR IG CORIZQ <pls> CORDER END PYC ;
+
+<pls> ::= <pls> COMA CADENA | <pls> COMA ID | CADENA | ID ;
+
+<values> ::= VALS DPD DOUBLE IG CORIZQ <vls> CORDER END PYC ;
+
+<vls> ::= <vls> COMA NUM | <vls> COMA ID | NUM | ID ;
+
+<titl> ::= TITLE DPD CHAR IG CADENA END PYC ;
+
+<sentgb> ::= <titl> <ejx> <ejy> <tx> <ty> ;
+
+<ejx> ::= EJX DPD CHAR IG CORIZQ <pls> CORDER END PYC ;
+
+<ejy> ::= EJY DPD DOUBLE IG CORIZQ <vls> CORDER END PYC ;
+
+<tx> ::= TX DPD CHAR IG CADENA END PYC ;
+
+<ty> ::= TY DPD CHAR IG CADENA END PYC ;
+
+<sentgl> ::= <titl> <ejx> <ejy> <tx> <ty> ;
+
+<sentgh> ::= <titl> <values> ;
